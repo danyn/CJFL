@@ -83,12 +83,15 @@ $journal_wysiwyg = array(
 
 
 //create repeatable groups for adding content to the journal issues.
+//https://github.com/CMB2/CMB2/wiki/Field-Types#group
 
 add_action( 'cmb2_admin_init', 'register_journal_content_1' );
 
 function register_journal_content_1() {
 	global $journal_wysiwyg;
-	$prefix = 'journal_content_1_';
+	$group_id = 'content_1';
+	//used to call this in the front end
+	$field_id = 'entry_1';
 	
 	$described_entry = "Use the same entry type for all the entries that follow in this group. For example, Articles.";
 
@@ -96,14 +99,16 @@ function register_journal_content_1() {
 	 * entry type one
 	 */
 	
+	//create the metabox
 	$cmb_content_one = new_cmb2_box( array(
-		'id'            => $prefix . 'metabox',
+		'id'            => $group_id,
 		'title'         => esc_html__( 'Journal Entry Group One', 'cmb2' ),
 		'object_types'  => array( 'journal' ), // Post Type
 	) );
 	
+	//add the repeatable group field type and get a reference to the id as a return value
 	$field_id_one = $cmb_content_one->add_field( array(
-		'id'          => 'entry_1',
+		'id'          => $field_id,
 		'type'        => 'group',
 		'description' => __( $described_entry, 'cmb2' ),
 		'options'     => array(
@@ -113,8 +118,9 @@ function register_journal_content_1() {
 			// 'closed'     => true, // true to have the groups closed by default
 			),
 		) );
-
-		$cmb_content_one->add_group_field( $field_id_one, array(
+		
+	//start adding in the repeatable fields
+	$cmb_content_one->add_group_field( $field_id_one, array(
 		'name' => 'Entry Type',
 		'id'   => 'entry_type',
 		'type' => 'text',
@@ -132,6 +138,5 @@ function register_journal_content_1() {
 		'type'    => 'wysiwyg',
 		'options' => $journal_wysiwyg,
 	) );
-	
 	
 }//register_journal_content_1
