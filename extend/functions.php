@@ -86,11 +86,11 @@ function allard_close_archives_div($div_break, $volume_number){
 	
  	if ( $volume_number == ($div_break + 1)) {
 		//write the closing div for  .journal-archives-left 
-		echo ' </div>';
+		echo ' </div>  <!-- .journal-archives-left -->';
   	}elseif($volume_number == 1 ) {
 		//write the closing div for .journal-archives-right
 		//here the volume represents the final volume in the result->Volume 1 (DESC) 
-		echo ' </div>';
+		echo ' </div>  <!-- .journal-archives-right -->';
 	}
 }
 
@@ -98,16 +98,12 @@ function allard_print_volume($volume_number, $issues){
 	
 //	allard_print_volume($volume_number, $issues);
 	
-	echo '<div class="a-journal">
-		<div class="big-volume-number"> Volume '
-			. $volume_number .
-		'</div>
-		<div class="volume-issues">
-			<ul>'
-				. $issues .
-			'</ul>    
-		</div>
-	</div>';
+	echo '<div class="a-journal">';
+	echo '<div class="big-volume-number"> Volume '. $volume_number . '</div> <!-- .big-volume-number -->' ;
+	echo '<div class="volume-issues">';
+	echo '<ul>' . $issues . '</ul>';    
+	echo '</div> <!-- .volume-issues -->';
+	echo '</div> <!-- .a-journal -->';
 
 }
 	 	
