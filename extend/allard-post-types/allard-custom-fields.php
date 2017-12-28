@@ -89,7 +89,7 @@ function register_journal_details() {
 /**
  * Entry Type One
  * create repeatable groups for adding content to the journal issues.
- * https://github.com/CMB2/CMB2/wiki/Field-Types#group
+ * 
 **/
 
 add_action( 'cmb2_admin_init', 'register_journal_content_1' );
@@ -113,7 +113,7 @@ function register_journal_content_1() {
 	) );
 	
 	
-	//Add a text field for the field type for example article or contest winner
+	//FIELD: get_post_meta( get_the_ID(), 'entry_type', true ); 
 	$cmb_content_one->add_field( array(
 	'name'    => 'Entry Type',
 	'desc'    => $described_entry,
@@ -123,8 +123,8 @@ function register_journal_content_1() {
 ) );
 	
 	
-	
-	//add the repeatable group field type and get a reference to the id as a return value
+	//https://github.com/CMB2/CMB2/wiki/Field-Types#group
+	//FIELD: get_post_meta( get_the_ID(), 'entry_1', true );
 	$field_id_one = $cmb_content_one->add_field( array(
 		'id'          => $field_id,
 		'type'        => 'group',
