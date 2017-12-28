@@ -19,11 +19,30 @@ if ( file_exists( dirname( __FILE__ ) . '/cmb2/init.php' ) ) {
 }
 
 
+//set any defaults here
+
+//set up the defualts for a wysiwyg
+$journal_wysiwyg = array(
+        'wpautop' => true, // use wpautop?
+        'media_buttons' => false, // show insert/upload button(s)
+        'textarea_name' => $editor_id, // set the textarea name to something different, square brackets [] can be used here
+        'textarea_rows' => get_option('default_post_edit_rows', 10), // rows="..."
+        'tabindex' => '',
+        'editor_css' => '', // intended for extra styles for both visual and HTML editors buttons, needs to include the `<style>` tags, can use "scoped".
+        'editor_class' => '', // add extra class(es) to the editor textarea
+        'teeny' => true, // output the minimal editor config used in Press This
+        'dfw' => false, // replace the default fullscreen with DFW (needs specific css)
+        'tinymce' => true, // load TinyMCE, can be used to pass settings directly to TinyMCE using an array()
+        'quicktags' => true // load Quicktags, can be used to pass settings directly to Quicktags using an array()
+    );
+
+
+/**
+ * add a meta box for each journals year, volume, and issue number
+ */
 
 add_action( 'cmb2_admin_init', 'register_journal_details' );
-/**
- * Hook in and add a demo metabox. Can only happen on the 'cmb2_admin_init' or 'cmb2_init' hook.
- */
+
 function register_journal_details() {
 	$prefix = 'journal_details_';
 
@@ -66,51 +85,50 @@ function register_journal_details() {
 
 
 
-//set up the defualts for a wysiwyg
-$journal_wysiwyg = array(
-        'wpautop' => true, // use wpautop?
-        'media_buttons' => false, // show insert/upload button(s)
-        'textarea_name' => $editor_id, // set the textarea name to something different, square brackets [] can be used here
-        'textarea_rows' => get_option('default_post_edit_rows', 10), // rows="..."
-        'tabindex' => '',
-        'editor_css' => '', // intended for extra styles for both visual and HTML editors buttons, needs to include the `<style>` tags, can use "scoped".
-        'editor_class' => '', // add extra class(es) to the editor textarea
-        'teeny' => true, // output the minimal editor config used in Press This
-        'dfw' => false, // replace the default fullscreen with DFW (needs specific css)
-        'tinymce' => true, // load TinyMCE, can be used to pass settings directly to TinyMCE using an array()
-        'quicktags' => true // load Quicktags, can be used to pass settings directly to Quicktags using an array()
-    );
 
-
-//create repeatable groups for adding content to the journal issues.
-//https://github.com/CMB2/CMB2/wiki/Field-Types#group
+/**
+ * Entry Type One
+ * create repeatable groups for adding content to the journal issues.
+ * https://github.com/CMB2/CMB2/wiki/Field-Types#group
+**/
 
 add_action( 'cmb2_admin_init', 'register_journal_content_1' );
 
 function register_journal_content_1() {
 	global $journal_wysiwyg;
 	$group_id = 'content_1';
-	//used to call this in the front end
+	//used to call this in the front end template code -> entry_1
 	$field_id = 'entry_1';
 	
-	$described_entry = "Use the same entry type for all the entries that follow in this group. For example, Articles.";
+	$described_entry = "Choose an entry type for all the entries that follow in this group. For example, Articles.";
 
-	/**
-	 * entry type one
-	 */
+	$described_group = "Add as many entries here as you need and they will be displayed for this journal issue";
+
 	
 	//create the metabox
 	$cmb_content_one = new_cmb2_box( array(
 		'id'            => $group_id,
-		'title'         => esc_html__( 'Journal Entry Group One', 'cmb2' ),
+		'title'         => esc_html__( 'Journal Entry Group A', 'cmb2' ),
 		'object_types'  => array( 'journal' ), // Post Type
 	) );
+	
+	
+	//Add a text field for the field type for example article or contest winner
+	$cmb_content_one->add_field( array(
+	'name'    => 'Entry Type',
+	'desc'    => $described_entry,
+	'default' => 'Articles',
+	'id'      => 'entry_type',
+	'type'    => 'text',
+) );
+	
+	
 	
 	//add the repeatable group field type and get a reference to the id as a return value
 	$field_id_one = $cmb_content_one->add_field( array(
 		'id'          => $field_id,
 		'type'        => 'group',
-		'description' => __( $described_entry, 'cmb2' ),
+		'description' => __( $described_group, 'cmb2' ),
 		'options'     => array(
 			'group_title'   => __( 'Entry {#}', 'cmb2' ), 
 			'add_button'    => __( 'Add Another Entry To This Group', 'cmb2' ),
@@ -120,11 +138,6 @@ function register_journal_content_1() {
 		) );
 		
 	//start adding in the repeatable fields
-	$cmb_content_one->add_group_field( $field_id_one, array(
-		'name' => 'Entry Type',
-		'id'   => 'entry_type',
-		'type' => 'text',
-		) );
 
 	$cmb_content_one->add_group_field( $field_id_one, array(
 		'name' => 'Title',
