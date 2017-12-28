@@ -9,7 +9,7 @@ function register_journal_details() {
 	$prefix = 'journal_details_';
 
 	/**
-	 * Setup the journal details
+	 * Setup the journal details meta box object
 	 */
 	$cmb_journal_details = new_cmb2_box( array(
 		'id'            => $prefix . 'metabox',
@@ -17,7 +17,7 @@ function register_journal_details() {
 		'object_types'  => array( 'journal' ), // Post type
 	) );
 	
-	
+//	FIELD: get_post_meta( get_the_ID(), 'year', true );
 	$cmb_journal_details->add_field( array(
 		'name' => esc_html__( 'Year', 'cmb2' ),
 		'desc' => esc_html__( 'Year of publication', 'cmb2' ),
@@ -26,7 +26,7 @@ function register_journal_details() {
 	) );
 	
 
-
+//	FIELD: get_post_meta( get_the_ID(), 'volume', true );
 	$cmb_journal_details->add_field( array(
 		'name' => esc_html__( 'Volume', 'cmb2' ),
 		'desc' => esc_html__( 'Volume Number', 'cmb2' ),
@@ -34,7 +34,7 @@ function register_journal_details() {
 		'type' => 'text_small',
 	) );
 	
-	
+//  FIELD: get_post_meta( get_the_ID(), 'issue', true );	
 	$cmb_journal_details->add_field( array(
 		'name' => esc_html__( 'Number', 'cmb2' ),
 		'desc' => esc_html__( 'The issue number within a given Volume', 'cmb2' ),
