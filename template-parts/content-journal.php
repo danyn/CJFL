@@ -19,15 +19,15 @@
 	    </header>
 	<?php
 		$entries = get_post_meta( get_the_ID(), 'entry_1', true );
-		$entry_type = get_post_meta( get_the_ID(), 'entry_type', true );
+		$entry_type_1 = get_post_meta( get_the_ID(), 'entry_type_1', true );
 //		debug
 //		var_dump($entries);
 //		echo "<h2>$entry_type</h2>"  ; 
 
 		//get the entry type of the first element and use it for the title of this group
 		//iterate if it is set 
-		if ( isset($entry_type) && !empty($entry_type)){
-			echo '<h1>' . $entry_type . '</h1>';
+		if ( isset($entry_type_1) && !empty($entry_type_1)){
+			echo '<h1>' . $entry_type_1 . '</h1>';
 			echo '<ul>';
 			//iterate through the post entry to get info
 			
