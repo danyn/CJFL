@@ -107,6 +107,29 @@ function allard_print_volume($volume_number, $issues){
 
 }
 	 	
+function allard_print_content($entry_type, $entries){
+	
+	echo '<h1>' . $entry_type . '</h1>';
+	echo '<ul>';
+	//iterate through the post entry to get info
+
+	foreach ( (array) $entries as $key => $entry ) {
+
+	//	one assignment to empty string
+		$title = $abstract = '';
+
+		if ( isset( $entry['title'] ) ) {
+			echo '<li>' . esc_html( $entry['title'] ) . '</li>';		
+		}
+
+		if ( isset( $entry['abstract'] ) ) {
+			echo  wpautop( $entry['abstract'] ) ;
+		}
+
+	}//foreach
+	echo '</ul>';
+	
+}
 	 	
 	 	
 	 	

@@ -18,37 +18,32 @@
 	    <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	    </header>
 	<?php
-		$entries = get_post_meta( get_the_ID(), 'entry_1', true );
+		
 		$entry_type_1 = get_post_meta( get_the_ID(), 'entry_type_1', true );
+		$entries_1 = get_post_meta( get_the_ID(), 'entry_1', true );
+		
 //		debug
 //		var_dump($entries);
 //		echo "<h2>$entry_type</h2>"  ; 
 
-		//get the entry type of the first element and use it for the title of this group
+		
 		//iterate if it is set 
-		if ( isset($entry_type_1) && !empty($entry_type_1)){
-			echo '<h1>' . $entry_type_1 . '</h1>';
-			echo '<ul>';
-			//iterate through the post entry to get info
-			
-			foreach ( (array) $entries as $key => $entry ) {
+if ( isset($entry_type_1) && !empty($entry_type_1)){
+	allard_print_content($entry_type_1, $entries_1);
+	
+}
 
-			//	one assignment to empty string
-				$title = $abstract = $s='';
+		
+		
 
-				if ( isset( $entry['title'] ) ) {
-					echo '<li>' . esc_html( $entry['title'] ) . '</li>';		
-				}
-
-				if ( isset( $entry['abstract'] ) ) {
-					echo  wpautop( $entry['abstract'] ) ;
-				}
-
-			}//foreach
-			echo '</ul>';
-		}else{
-			echo '<p>There is no content for this issue currently</p>';
-		}
+		
+		
+		
+		
+		
+//		}else{
+//			echo '<p>There is no content for this issue currently</p>';
+//		}
 			
 		
 		
