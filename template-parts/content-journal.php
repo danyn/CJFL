@@ -17,29 +17,27 @@
 	    <header class="entry-header">
 	    <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	    </header>
-	<?php
+<?php
+//		gather all of the meta information into an array with the type at 0 and
+//	 	the array of title, author and abstract at 1
 		
-		$entry_type_1 = get_post_meta( get_the_ID(), 'entry_type_1', true );
-		$entries_1 = get_post_meta( get_the_ID(), 'entry_1', true );
-		
-//		debug
-//		var_dump($entries);
-//		echo "<h2>$entry_type</h2>"  ; 
-
-		
-		//iterate if it is set 
-if ( (isset($entry_type_1) && !empty($entry_type_1)) ){		
-	if ( isset($entry_type_1) && !empty($entry_type_1)){
-		allard_print_content($entry_type_1, $entries_1);
-		}		
-		}else{
+		$entry_cache = array(array(get_post_meta( get_the_ID(), 'entry_type_1', true ),
+								   get_post_meta( get_the_ID(), 'entry_1', true )),
+							 array(get_post_meta( get_the_ID(), 'entry_type_2', true ),
+								   get_post_meta( get_the_ID(), 'entry_2', true )),
+							);
+//		iterate through the array calling a markup function
+		$is_content=0;
+		foreach($entry_cache as $value){
+				if ( isset($value[0]) && !empty($value[0]) ){
+					allard_print_content($value[0], $value[1]);
+					$is_content += 1;
+				}	
+		}
+		if($is_content==0){
 			echo '<p>There is no content for this issue currently</p>';
 		}
-			
-		
-		
-		
-		?>
+?>
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">

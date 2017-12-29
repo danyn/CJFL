@@ -2,7 +2,10 @@
 /**
  * Entry Group A
  * create repeatable groups for adding content to the journal issues.
- * 
+ *  
+ * FIELD: get_post_meta( get_the_ID(), 'entry_type_1', true ); 
+ * FIELD: get_post_meta( get_the_ID(), 'entry_1', true );
+ * keys ('author','title', 'abstract')
 **/
 
 add_action( 'cmb2_admin_init', 'register_journal_content_1' );
@@ -10,17 +13,20 @@ add_action( 'cmb2_admin_init', 'register_journal_content_1' );
 function register_journal_content_1() {
 	
 	//vars for the meta box
-	$box_id = 'content_1';//meta box id used internally by cmb2
+	$box_id = 't_8';//meta box id used internally by cmb2
 	$title= 'Journal Entry Group A';  ;
 
 	
 	//vars for the entry type
 	$field_entry_type_id =  'entry_type_1';//string field used in template code
+	
 	$described_entry = "Choose an entry type for all the entries that follow in this group. For example, Articles. This will also be the heading that is displayed when a person visits the website so if there is more than one plural is a good choice. Article for one article and Articles for more than one article.";
 	
 	//vars for the repeating group
-	$field_group_id = 'entry_1';//repeating field used in template code
+	$field_group_id = 'entry_1';//string field used in template code
+	
 	$described_group = "Add as many entries here as you need and they will be displayed for this journal issue";
+	
 	global $journal_wysiwyg;
 	
 	//create the metabox  
@@ -30,17 +36,17 @@ function register_journal_content_1() {
 		'object_types'  => array( 'journal' ), // Post Type
 	) );
 		
-	//FIELD: get_post_meta( get_the_ID(), 'entry_type_1', true ); 
+	
 	$cmb_content_one->add_field( array(
 	'name'    => 'Entry Type',
 	'desc'    => $described_entry,
 	'id'      => $field_entry_type_id,
 	'type'    => 'text',
-//	'attributes'  => array( 'placeholder' => $default_entry_type),
 ) );
 	
+
 	//https://github.com/CMB2/CMB2/wiki/Field-Types#group
-	//FIELD: get_post_meta( get_the_ID(), 'entry_1', true );
+
 	$field_id_one = $cmb_content_one->add_field( array(
 		'id'          => $field_group_id,
 		'type'        => 'group',
@@ -53,7 +59,7 @@ function register_journal_content_1() {
 			),
 		) );
 		
-	//start adding in the repeatable fields
+	//start adding in the repeatable fields for the group
 
 	$cmb_content_one->add_group_field( $field_id_one, array(
 		'name' => 'Title',
