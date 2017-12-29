@@ -61,6 +61,12 @@ function register_journal_content_1() {
 		'type' => 'text',
 		) );
 	
+		$cmb_content_one->add_group_field( $field_id_one, array(
+		'name' => 'Author(s)',
+		'id'   => 'author',
+		'type' => 'text',
+		) );
+	
 	$cmb_content_one->add_group_field( $field_id_one, array(
 		'name' => 'Abstract',
 		'id'   => 'abstract',

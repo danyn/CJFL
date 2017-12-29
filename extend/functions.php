@@ -110,7 +110,7 @@ function allard_print_volume($volume_number, $issues){
 function allard_print_content($entry_type, $entries){
 	
 	echo '<h1>' . $entry_type . '</h1>';
-	echo '<ul>';
+	echo '<ul class="journal-contents">';
 	//iterate through the post entry to get info
 
 	foreach ( (array) $entries as $key => $entry ) {
@@ -119,7 +119,7 @@ function allard_print_content($entry_type, $entries){
 		$title = $abstract = '';
 
 		if ( isset( $entry['title'] ) ) {
-			echo '<li>' . esc_html( $entry['title'] ) . '</li>';		
+			echo '<li>' . esc_html( $entry['title'] ) . ' - <span> '. esc_html( $entry['author'] ) . ' </span></li>';		
 		}
 
 		if ( isset( $entry['abstract'] ) ) {

@@ -1128,3 +1128,9 @@ p.allard-disclaimer {
 .volume-issues li {
     list-style-type: none;
 }
+
+/*journal contents pages*/
+
+ul.journal-contents span {
+    font-style:  italic;
+}
