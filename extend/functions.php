@@ -130,6 +130,17 @@ function allard_print_content($entry_type, $entries){
 	echo '</ul>';
 	
 }
+
+
+//style admin pages like the cmb2 boxes
+add_action('admin_head', 'allard_admin_styles');
+
+function allard_admin_styles() {
+  echo '<style>
+  			/*cmb2 admin styles*/
+			.regular-text{width:90%}
+  		</style>';
+}
 	 	
 	 	
 	 	

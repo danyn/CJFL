@@ -40,7 +40,7 @@ function create_allard_post_types() {
 		'hierarchical'       => false,
 		'menu_position'      => 2,
              'menu_icon' =>'dashicons-book-alt',
-		'supports'           => array( 'title', 'editor', 'author', 'thumbnail')
+		'supports'           => array( 'title', 'author')
 	);
 
 	register_post_type( 'journal', $args );

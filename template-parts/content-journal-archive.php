@@ -42,7 +42,7 @@ if ( $query_results_journals->have_posts() ) {
 ?>
 
 	<!--debug info-->
-	<?php // allard_debug_archive($num_volumes, $half_volumes, $is_even);?>
+	<?php  //allard_debug_archive($num_volumes, $half_volumes, $is_even);?>
 
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

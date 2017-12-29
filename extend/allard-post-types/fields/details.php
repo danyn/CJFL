@@ -6,7 +6,7 @@
 add_action( 'cmb2_admin_init', 'register_journal_details' );
 
 function register_journal_details() {
-	$prefix = 'journal_details_';
+	$prefix = 'allard_';
 
 	/**
 	 * Setup the journal details meta box object
@@ -15,6 +15,9 @@ function register_journal_details() {
 		'id'            => $prefix . 'metabox',
 		'title'         => esc_html__( 'Journal Details', 'cmb2' ),
 		'object_types'  => array( 'journal' ), // Post type
+		'priority'      => 'default',
+		'context'       => 'side',
+ 		
 	) );
 	
 //	FIELD: get_post_meta( get_the_ID(), 'year', true );

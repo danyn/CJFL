@@ -28,22 +28,13 @@
 
 		
 		//iterate if it is set 
-if ( isset($entry_type_1) && !empty($entry_type_1)){
-	allard_print_content($entry_type_1, $entries_1);
-	
-}
-
-		
-		
-
-		
-		
-		
-		
-		
-//		}else{
-//			echo '<p>There is no content for this issue currently</p>';
-//		}
+if ( (isset($entry_type_1) && !empty($entry_type_1)) ){		
+	if ( isset($entry_type_1) && !empty($entry_type_1)){
+		allard_print_content($entry_type_1, $entries_1);
+		}		
+		}else{
+			echo '<p>There is no content for this issue currently</p>';
+		}
 			
 		
 		
